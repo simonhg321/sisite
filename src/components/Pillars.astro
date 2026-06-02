@@ -1,0 +1,93 @@
+---
+import { withBase } from "../lib/url";
+
+const pillars = [
+  {
+    n: "01",
+    title: "Shipped",
+    body: "Production AI systems running today — Claude in the decision loop, real users, real SMS, A2P 10DLC compliant. More live infrastructure than I had at a funded dot-com in 2000.",
+    link: { href: "/build", label: "What I build" },
+  },
+  {
+    n: "02",
+    title: "Secured",
+    body: "Bloomberg's first CISO. Tapped the network at L2, L3, L4 — and L8, the human layer. Built correlation engines before SIEM was a category, and the back channel between the USG and Wall Street.",
+    link: { href: "/experience", label: "The record" },
+  },
+  {
+    n: "03",
+    title: "Sold",
+    body: "Invented Gigamon's inline L2 SSL Intercept, drove $500M+ in closed government revenue, and rang the Nasdaq bell. I've been in the room where the business gets made.",
+    link: { href: "/experience", label: "Patents & deals" },
+  },
+];
+---
+
+<section>
+  <div class="wrap">
+    <p class="kicker">The through-line</p>
+    <h2 class="pil__head">Build it. Secure it. Make it safe. Sell it.</h2>
+    <div class="pillars">
+      {
+        pillars.map((p) => (
+          <article class="card pillar">
+            <span class="pillar__n num">{p.n}</span>
+            <h3 class="pillar__title">{p.title}</h3>
+            <p class="pillar__body">{p.body}</p>
+            <a href={withBase(p.link.href)} class="ulink mono pillar__link">
+              {p.link.label} →
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .pil__head {
+    margin-top: 18px;
+    max-width: 16ch;
+  }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 44px;
+  }
+  .pillar {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .pillar:hover {
+    border-color: var(--border-2);
+    transform: translateY(-3px);
+  }
+  .pillar__n {
+    font-size: 12px;
+    color: var(--ember);
+    letter-spacing: 0.04em;
+  }
+  .pillar__title {
+    margin-top: 10px;
+    font-size: 1.5rem;
+  }
+  .pillar__body {
+    margin-top: 12px;
+    color: var(--silver);
+    font-size: 15px;
+    line-height: 1.6;
+    flex: 1;
+  }
+  .pillar__link {
+    margin-top: 20px;
+    font-size: 12.5px;
+    align-self: flex-start;
+  }
+  @media (max-width: 820px) {
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

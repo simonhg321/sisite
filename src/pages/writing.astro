@@ -1,0 +1,138 @@
+---
+import Base from "../layouts/Base.astro";
+import PublicationList from "../components/PublicationList.astro";
+import { getCollection } from "astro:content";
+import { withBase } from "../lib/url";
+
+const essays = (await getCollection("writing", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const gigamon = [
+  { title: "CISO Risk Registry: Getting Risk Tolerance and Technology Capabilities in Equilibrium", href: "https://blog.gigamon.com/2017/11/07/ciso-risk-registry-getting-risk-tolerance-technology-capabilities-equilibrium/", meta: "2017" },
+  { title: "How the Gigamon SOC Responds to Attacks Like WannaCry and NotPetya", href: "https://blog.gigamon.com/2017/06/28/gigamon-soc-responds-attacks-like-wannacry-notpetya/", meta: "2017" },
+  { title: "What's to Learn from the DHS and FBI Joint Analysis Report on the DNC Hack?", href: "https://blog.gigamon.com/2017/01/12/whats-learn-dhs-fbi-joint-analysis-report-dnc-hack/", meta: "2017" },
+  { title: "Kaspersky and the DHS Binding Operational Directive", href: "https://blog.gigamon.com/2017/10/06/kaspersky-department-homeland-security-binding-operational-directive-supply-chain-control-technically-legally-existentially/", meta: "2017" },
+  { title: "The Time for Network Security Automation Is Now", href: "https://blog.gigamon.com/2017/10/13/time-network-security-automation-now-phantom-faster-accurate-incident-response/", meta: "2017" },
+  { title: "The Cyber \"Security Dilemma\"", href: "https://blog.gigamon.com/2018/10/08/the-cyber-security-dilemma/", meta: "2018" },
+  { title: "Why I Chose a Career in Cybersecurity", href: "https://blog.gigamon.com/2017/10/22/chose-career-cybersecurity-choice-challenge-chance-play-paladin/", meta: "2017" },
+];
+
+const gigaom = [
+  { title: "Key Criteria for Evaluating Phishing Protection Platforms", href: "https://gigaom.com/report/key-criteria-for-evaluating-phishing-protection-platforms/" },
+  { title: "GigaOm Radar for Phishing Prevention and Detection", href: "https://research.gigaom.com/report/gigaom-radar-for-phishing-prevention-and-detection/" },
+  { title: "Public Key Infrastructure", href: "https://research.gigaom.com/report/public-key-infrastructure/" },
+  { title: "Deception Technology", href: "https://research.gigaom.com/report/deception-technology/" },
+  { title: "The New Ecosystem of Identity & Access Management", href: "https://research.gigaom.com/report/the-new-ecosystem-of-identity-access-management/" },
+  { title: "Key Criteria for Evaluating GRC Solutions", href: "https://gigaom.com/report/key-criteria-for-evaluating-governance-risk-and-compliance-grc-solutions/" },
+];
+---
+
+<Base
+  title="Writing — Simon Gibson"
+  description="Security writing and analyst research: CISO risk, WannaCry/NotPetya, the DNC hack, phishing, PKI, deception technology, IAM, GRC."
+>
+  <section class="head">
+    <div class="wrap">
+      <p class="kicker reveal">Writing &amp; research</p>
+      <h1 class="head__h reveal" style="animation-delay: 90ms">
+        Publish less, but sharper.
+      </h1>
+      <p class="lede reveal" style="animation-delay: 200ms">
+        Published security writing and analyst research from the Gigamon years,
+        plus the public log of the fleet shipping product now.
+      </p>
+    </div>
+  </section>
+
+  <section class="body">
+    <div class="wrap">
+      {
+        essays.length > 0 && (
+          <div class="essays">
+            <header class="essays__head">
+              <h3>Essays</h3>
+            </header>
+            <ul class="essays__list">
+              {essays.map((e) => (
+                <li>
+                  <a href={withBase(`/writing/${e.slug}`)} class="essays__link">
+                    <span class="essays__title">{e.data.title}</span>
+                    <time class="essays__date mono" datetime={e.data.date.toISOString()}>
+                      {e.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short" })}
+                    </time>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      <PublicationList heading="Gigamon Blog" source="blog.gigamon.com" items={gigamon} />
+      <PublicationList heading="GigaOm Research" source="gigaom.com" items={gigaom} />
+
+      <div class="skipper">
+        <p class="kicker">Shipping now</p>
+        <p class="skipper__text">
+          <strong>The Skipper</strong> — a public log of AI agents shipping
+          product, authored by The Castaways.
+          <a href="https://instockornot.club/blog.html" class="ulink" rel="noopener" target="_blank">Read the log ↗</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(56px, 9vw, 110px) clamp(8px, 3vw, 40px);
+  }
+  .head__h {
+    margin-top: 22px;
+  }
+  .head .lede {
+    margin-top: 26px;
+  }
+  .body {
+    padding-block: clamp(16px, 3vw, 40px) clamp(48px, 8vw, 96px);
+  }
+  .essays__head {
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-2);
+  }
+  .essays__head h3 {
+    font-size: 1.4rem;
+  }
+  .essays__list {
+    list-style: none;
+  }
+  .essays__link {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 15px 4px;
+    border-bottom: 1px solid var(--border);
+  }
+  .essays__link:hover .essays__title {
+    color: var(--white);
+  }
+  .essays__title {
+    color: var(--silver);
+    transition: color 0.2s;
+  }
+  .essays__date {
+    font-size: 12px;
+    color: var(--faint);
+  }
+  .skipper {
+    margin-top: 52px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-2);
+  }
+  .skipper__text {
+    margin-top: 12px;
+    font-size: 1.05rem;
+    color: var(--silver);
+  }
+</style>

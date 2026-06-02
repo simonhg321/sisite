@@ -1,0 +1,164 @@
+---
+interface Spec {
+  label: string;
+  value: string;
+}
+interface Link {
+  href: string;
+  label: string;
+}
+interface Props {
+  n: string;
+  name: string;
+  tagline?: string;
+  body: string;
+  specs?: Spec[];
+  links?: Link[];
+  lead?: boolean;
+  quote?: string;
+}
+const { n, name, tagline, body, specs = [], links = [], lead = false, quote } =
+  Astro.props;
+---
+
+<article class:list={["card proj", { "proj--lead": lead }]}>
+  <header class="proj__head">
+    <span class="proj__n num">{n}</span>
+    {lead && <span class="proj__flag mono">Lead artifact</span>}
+  </header>
+
+  <h3 class="proj__name">{name}</h3>
+  {tagline && <p class="proj__tagline">{tagline}</p>}
+
+  <p class="proj__body" set:html={body} />
+
+  {
+    quote && (
+      <blockquote class="proj__quote">
+        <p set:html={quote} />
+      </blockquote>
+    )
+  }
+
+  {
+    specs.length > 0 && (
+      <dl class="proj__specs">
+        {specs.map((s) => (
+          <div>
+            <dt class="mono">{s.label}</dt>
+            <dd class="num">{s.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+
+  {
+    links.length > 0 && (
+      <div class="proj__links">
+        {links.map((l) => (
+          <a href={l.href} class="ulink mono" rel="noopener" target="_blank">
+            {l.label} ↗
+          </a>
+        ))}
+      </div>
+    )
+  }
+</article>
+
+<style>
+  .proj {
+    display: flex;
+    flex-direction: column;
+  }
+  .proj--lead {
+    border-color: color-mix(in srgb, var(--ember) 45%, var(--border));
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--ember) 7%, var(--panel)),
+      var(--ink)
+    );
+  }
+  .proj__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .proj__n {
+    font-size: 12px;
+    color: var(--ember);
+  }
+  .proj__flag {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ember);
+    border: 1px solid color-mix(in srgb, var(--ember) 45%, transparent);
+    border-radius: 5px;
+    padding: 3px 9px;
+  }
+  .proj__name {
+    margin-top: 16px;
+    font-size: 1.6rem;
+  }
+  .proj__tagline {
+    margin-top: 8px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ember-2);
+  }
+  .proj__body {
+    margin-top: 14px;
+    color: var(--silver);
+    font-size: 15px;
+    line-height: 1.62;
+  }
+  :global(.proj__body strong) {
+    color: var(--white);
+  }
+  .proj__quote {
+    margin-top: 18px;
+    padding-left: 16px;
+    border-left: 2px solid var(--ember);
+  }
+  .proj__quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--white);
+    line-height: 1.5;
+  }
+  .proj__specs {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    overflow: hidden;
+  }
+  .proj__specs > div {
+    background: var(--ink);
+    padding: 13px 15px;
+  }
+  .proj__specs dt {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .proj__specs dd {
+    margin-top: 5px;
+    font-size: 14px;
+    color: var(--white);
+  }
+  .proj__links {
+    margin-top: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-size: 12.5px;
+  }
+</style>

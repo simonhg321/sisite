@@ -1,0 +1,200 @@
+/* =========================================================================
+   Simon Gibson — "a terminal that learned typography"
+   Dark operator canvas · ember signal · editorial serif + precise mono
+   ========================================================================= */
+
+:root {
+  /* Canvas */
+  --black:   #0a0b0d;
+  --ink:     #0e1014;
+  --panel:   #14171c;
+  --panel-2: #181c22;
+  --border:  #242a32;
+  --border-2:#2e353f;
+
+  /* Text */
+  --white:  #ecece6;   /* warm off-white */
+  --silver: #b7bcc4;
+  --ash:    #7d848d;
+  --faint:  #525861;
+
+  /* Signal */
+  --ember:  #e6702a;   /* primary accent — matches the operator stack */
+  --ember-2:#f08a3c;
+  --flame:  #f85149;   /* alert red, sparingly */
+  --cyan:   #5db0d1;   /* cool secondary, very sparing */
+  --good:   #2ecc71;
+
+  /* Type */
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans:  "Hanken Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:  "JetBrains Mono", "SF Mono", "Fira Code", ui-monospace, monospace;
+
+  /* Rhythm */
+  --maxw: 1080px;
+  --gutter: clamp(20px, 5vw, 56px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- Light theme: the terminal in daylight (warm paper) --------------- */
+html[data-theme="light"] {
+  --black:   #f4f1e9;   /* warm paper canvas */
+  --ink:     #efeadf;
+  --panel:   #ffffff;
+  --panel-2: #f2ede2;
+  --border:  #e1dacb;
+  --border-2:#cdc4b1;
+
+  --white:  #16181b;    /* primary ink */
+  --silver: #3d424a;
+  --ash:    #6b717a;
+  --faint:  #969ba3;
+
+  --ember:  #c2581a;    /* deepened for contrast on paper */
+  --ember-2:#d96d22;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  position: relative;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+/* Atmosphere: faint vertical grid + film grain over the whole canvas */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 96px 100%;
+  mask-image: linear-gradient(180deg, transparent, black 12%, black 88%, transparent);
+}
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* On paper the white grid vanishes — switch to a dark hairline and dial back grain */
+html[data-theme="light"] body::before {
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,0.045) 1px, transparent 1px);
+}
+html[data-theme="light"] body::after { opacity: 0.02; }
+
+/* keep content above atmosphere */
+main, nav, footer { position: relative; z-index: 1; }
+
+/* ---- Typography ------------------------------------------------------- */
+h1, h2, h3 { font-family: var(--serif); font-weight: 460; line-height: 1.04; letter-spacing: -0.015em; }
+h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); }
+h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.01em; }
+
+a { color: inherit; text-decoration: none; }
+strong { color: var(--white); font-weight: 600; }
+em { font-style: italic; }
+
+/* The operator's label — recurring section marker */
+.kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ember);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.kicker::before {
+  content: "";
+  width: 26px; height: 1px;
+  background: var(--ember);
+  opacity: 0.8;
+}
+
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.num  { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+/* ---- Layout ----------------------------------------------------------- */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--gutter); }
+section { padding-block: clamp(56px, 9vw, 120px); }
+.rule { height: 1px; background: linear-gradient(90deg, var(--border-2), transparent); border: 0; }
+
+.lede { font-size: clamp(1.15rem, 2.1vw, 1.4rem); color: var(--silver); line-height: 1.55; max-width: 60ch; }
+
+/* ---- Links with operator underline ------------------------------------ */
+.ulink {
+  color: var(--white);
+  background-image: linear-gradient(var(--ember), var(--ember));
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s var(--ease), color 0.2s;
+  padding-bottom: 1px;
+}
+.ulink:hover { background-size: 100% 1.5px; color: var(--ember-2); }
+
+/* ---- Buttons ---------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--mono); font-size: 12.5px; font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 11px 18px;
+  border: 1px solid var(--border-2);
+  border-radius: 7px;
+  color: var(--white);
+  background: var(--panel);
+  transition: border-color 0.25s, color 0.25s, transform 0.25s var(--ease), background 0.25s;
+}
+.btn:hover { border-color: var(--ember); color: var(--ember); transform: translateY(-2px); }
+.btn.solid { background: var(--ember); border-color: var(--ember); color: #140a04; }
+.btn.solid:hover { background: var(--ember-2); border-color: var(--ember-2); color: #140a04; }
+.btn .arr { transition: transform 0.25s var(--ease); }
+.btn:hover .arr { transform: translateX(3px); }
+
+/* ---- Cards ------------------------------------------------------------ */
+.card {
+  background: linear-gradient(180deg, var(--panel), var(--ink));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 26px;
+  transition: border-color 0.3s, transform 0.3s var(--ease);
+}
+.card:hover { border-color: var(--border-2); }
+
+/* ---- Reveal-on-load (staggered) --------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal { opacity: 0; transform: translateY(14px); animation: rise 0.9s var(--ease) forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+}
+
+/* ---- Selection -------------------------------------------------------- */
+::selection { background: rgba(230,112,42,0.32); color: var(--white); }
+
+/* ---- Scrollbar -------------------------------------------------------- */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 6px; border: 3px solid var(--black); }
+::-webkit-scrollbar-thumb:hover { background: var(--ash); }
+
+img { max-width: 100%; display: block; }

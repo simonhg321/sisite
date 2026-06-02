@@ -1,0 +1,123 @@
+---
+import Base from "../layouts/Base.astro";
+
+const channels = [
+  { label: "Email", value: "simon@instockornot.club", href: "mailto:simon@instockornot.club" },
+  { label: "LinkedIn", value: "in/simonhg", href: "https://www.linkedin.com/in/simonhg" },
+  { label: "GitHub", value: "github.com/simonhg321", href: "https://github.com/simonhg321" },
+];
+---
+
+<Base
+  title="Contact — Simon Gibson"
+  description="Get in touch with Simon Gibson. Email, LinkedIn, GitHub. References available on request."
+>
+  <section class="contact">
+    <div class="wrap">
+      <p class="kicker reveal">Contact</p>
+      <h1 class="contact__h reveal" style="animation-delay: 90ms">
+        I want to walk into rooms full of CISOs and tell them the truth about
+        this technology.
+      </h1>
+      <p class="lede contact__lede reveal" style="animation-delay: 200ms">
+        Frontier-lab security and safety leadership, well-funded security-of-AI
+        startups, or govtech with real technical depth. I've sat in the
+        regulated-industry CISO chair — and I know this technology from the
+        inside.
+      </p>
+
+      <ul class="channels reveal" style="animation-delay: 320ms">
+        {
+          channels.map((c) => (
+            <li class="channel">
+              <span class="channel__label mono">{c.label}</span>
+              <a
+                href={c.href}
+                class="channel__value"
+                rel="noopener"
+                target={c.href.startsWith("http") ? "_blank" : undefined}
+              >
+                {c.value}
+                <span class="channel__arr mono" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="refs mono reveal" style="animation-delay: 420ms">
+        References available on request.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact {
+    padding-block: clamp(64px, 11vw, 140px) clamp(56px, 9vw, 120px);
+  }
+  .contact__h {
+    margin-top: 24px;
+    max-width: 20ch;
+  }
+  .contact__lede {
+    margin-top: 28px;
+  }
+  .channels {
+    list-style: none;
+    margin-top: clamp(40px, 6vw, 72px);
+    border-top: 1px solid var(--border);
+  }
+  .channel {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    align-items: baseline;
+    gap: 20px;
+    padding: 22px 4px;
+    border-bottom: 1px solid var(--border);
+    transition: padding-left 0.25s var(--ease), background 0.2s;
+  }
+  .channel:hover {
+    padding-left: 14px;
+    background: linear-gradient(90deg, var(--panel), transparent);
+  }
+  .channel__label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .channel__value {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+    color: var(--white);
+    transition: color 0.2s;
+  }
+  .channel:hover .channel__value {
+    color: var(--ember);
+  }
+  .channel__arr {
+    font-size: 1rem;
+    color: var(--faint);
+    transition: transform 0.25s var(--ease), color 0.2s;
+  }
+  .channel:hover .channel__arr {
+    color: var(--ember);
+    transform: translateX(5px);
+  }
+  .refs {
+    margin-top: 36px;
+    font-size: 12.5px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 560px) {
+    .channel {
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+  }
+</style>

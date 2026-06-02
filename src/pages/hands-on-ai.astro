@@ -1,0 +1,163 @@
+---
+import Base from "../layouts/Base.astro";
+import { Content } from "../data/ollama-reference.md";
+import { withBase } from "../lib/url";
+---
+
+<Base
+  title="Hands-On AI — Simon Gibson"
+  description="Run AI on your own laptop. A practical Ollama quick reference and the Hands-On AI Guild deck — make AI hands-on, not theoretical."
+>
+  <section class="head">
+    <div class="wrap">
+      <p class="kicker reveal">Hands-on AI</p>
+      <h1 class="head__h reveal" style="animation-delay: 90ms">
+        Run AI on your own laptop. Easy, and fun.
+      </h1>
+      <p class="lede reveal" style="animation-delay: 200ms">
+        I make AI hands-on, not theoretical. Below is a working Ollama quick
+        reference — the same notes I hand people who want a model running
+        locally in an afternoon. Run your own models; own your own proof.
+      </p>
+      <div class="head__cta reveal" style="animation-delay: 320ms">
+        <a class="btn solid" href={withBase("/Hands-On-AI-Guild-PUBLIC.pptx")} download>
+          Download the Guild deck <span class="arr">↓</span>
+        </a>
+        <a class="btn" href={withBase("/Ollama-Quick-Reference.md")} download>
+          Download this reference <span class="arr">↓</span>
+        </a>
+        <a class="btn" href="https://ollama.com/download" rel="noopener" target="_blank">
+          Get Ollama
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ref">
+    <div class="wrap ref__wrap">
+      <article class="prose">
+        <Content />
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(56px, 9vw, 110px) clamp(20px, 4vw, 48px);
+  }
+  .head__h {
+    margin-top: 22px;
+    max-width: 16ch;
+  }
+  .head .lede {
+    margin-top: 26px;
+  }
+  .head__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+  }
+  .ref {
+    padding-block: clamp(16px, 3vw, 40px) clamp(48px, 8vw, 96px);
+  }
+  .ref__wrap {
+    max-width: 880px;
+  }
+
+  /* ---- Rendered markdown prose ---- */
+  .prose :global(h1) {
+    display: none; /* page already carries the title */
+  }
+  .prose :global(h2) {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-top: 64px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border-2);
+  }
+  .prose :global(h2:first-of-type) {
+    margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+  }
+  .prose :global(h3) {
+    font-size: 1.2rem;
+    margin-top: 38px;
+    color: var(--ember-2);
+    font-family: var(--mono);
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .prose :global(p) {
+    color: var(--silver);
+    margin-top: 14px;
+    line-height: 1.65;
+  }
+  .prose :global(strong) {
+    color: var(--white);
+  }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .prose :global(thead) {
+    background: var(--panel-2);
+  }
+  .prose :global(th) {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ash);
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border-2);
+  }
+  .prose :global(td) {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: var(--silver);
+    vertical-align: top;
+  }
+  .prose :global(tbody tr:last-child td) {
+    border-bottom: 0;
+  }
+  .prose :global(td code),
+  .prose :global(p code),
+  .prose :global(li code) {
+    font-family: var(--mono);
+    font-size: 0.86em;
+    color: var(--ember-2);
+    background: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 1px 6px;
+  }
+  .prose :global(pre) {
+    margin-top: 18px;
+    background: var(--ink);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    overflow-x: auto;
+  }
+  .prose :global(pre code) {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--silver);
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .prose :global(ul) {
+    margin-top: 14px;
+    padding-left: 20px;
+    color: var(--silver);
+  }
+</style>

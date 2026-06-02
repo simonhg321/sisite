@@ -1,0 +1,203 @@
+---
+import Base from "../layouts/Base.astro";
+import ExperienceEntry from "../components/ExperienceEntry.astro";
+
+const roles = [
+  {
+    role: "Principal Security Architect, Ransomware Center of Excellence",
+    company: "Navy Federal Credit Union",
+    dates: "2022 — Present",
+    location: "Spokane, WA",
+    tag: "Current",
+    bullets: [
+      "Run the Ransomware CoE at the largest credit union in the US — steering committee, working groups, board-level briefings, and engineering war rooms.",
+      "Spent a year pushing a security architecture the institution didn't know it needed yet. <strong>It's deployed now.</strong>",
+      "RSAC 2025 — Cloudflare TV. RSAC 2026 — live <em>\"dead in 12 months\"</em> assessment of 20+ AI security vendors on the show floor.",
+      "Bloomberg Terminal subscriber — financial-sector threat intelligence as a daily working tool.",
+    ],
+  },
+  {
+    role: "Security Fellow & CISO",
+    company: "Gigamon",
+    dates: "2013 — 2017",
+    location: "SF Bay Area",
+    bullets: [
+      "Invented Gigamon's inline Layer 2 SSL Intercept (GigaView) — the technology that made network visibility possible in encrypted environments. Patented (US 20180159898).",
+      "Ran the internal security program while helping sell the product. Both mattered.",
+      "Led pre-sales on the government side — closed deals with USG agencies including the NNSA. Drove north of <strong>$500M in closed revenue.</strong>",
+      "Published analyst at GigaOm Research — phishing protection, PKI, deception technology, IAM, GRC.",
+      "Rang the Nasdaq closing bell.",
+    ],
+  },
+  {
+    role: "CISO · Head, Information Security Group",
+    company: "Bloomberg LP",
+    dates: "2003 — 2013",
+    location: "New York → SF",
+    tag: "First CISO",
+    bullets: [
+      "Bloomberg's <strong>first CISO.</strong> Started as Unix Security Lead and built the program from the ground up — Attack Team, Product Security, Incident Response — creating the role before the title existed in the industry.",
+      "Built correlation engines before SIEM was a product category. Tapped the network at L2, L3, L4 — and <strong>L8, the human layer.</strong> Made the safe path the easy path for 2,500 developers against 100 sysadmins.",
+      "Operation Aurora (2010): when pressure came into the newsroom not to publish, Dan Doctoroff asked if we were secure. I told him yes — and I meant it. The story ran.",
+      "Built the back channel between the US Government and Wall Street during some of the worst cyber years the financial sector had seen. Cybersecurity advisory to the World Economic Forum.",
+    ],
+  },
+  {
+    role: "Founder & Operator",
+    company: "Binny's Bar & Restaurant · Old Oakland",
+    dates: "2019 — 2021",
+    location: "Oakland, CA",
+    tag: "Field MBA",
+    bullets: [
+      "Built out and operated a full-service bar and restaurant — construction, permits, full team, real P&L. Ran it through COVID. <strong>Closed clean.</strong>",
+    ],
+  },
+  {
+    role: "Systems Architect",
+    company: "Verisign",
+    dates: "2001 — 2003",
+    location: "Washington, DC",
+    bullets: [
+      "DNS root infrastructure at scale. M&A, the .com/.net TLDs, and the Registry Registrar Protocol (RRP). The part of the internet that has to be right 100% of the time.",
+    ],
+  },
+  {
+    role: "Systems Architect",
+    company: "AOL / Winamp / Shoutcast",
+    dates: "1998 — 2001",
+    bullets: [
+      "Ran the systems side of Winamp and Shoutcast — streaming media infrastructure before anyone had a playbook for it.",
+    ],
+  },
+];
+
+const patents = [
+  { title: "Analysis of Network Traffic Rules at a Network Visibility Node", id: "US 20180159898", note: "Issued 2019" },
+  { title: "Network Enumeration at a Network Visibility Node", id: "US 20180205611", note: "" },
+  { title: "Stream Sourcing Content Delivery System", id: "US 7912920", note: "Issued 2011" },
+  { title: "Localization Link System", id: "US 20050097185A1", note: "" },
+];
+---
+
+<Base
+  title="Experience — Simon Gibson"
+  description="Four eras: streaming infrastructure, the DNS root, the regulated-industry CISO chair, and now AI in production. Bloomberg, Gigamon, Verisign, NFCU."
+>
+  <section class="head">
+    <div class="wrap">
+      <p class="kicker reveal">The 25-year record</p>
+      <h1 class="head__h reveal" style="animation-delay: 90ms">
+        Four eras, one through-line.
+      </h1>
+      <p class="lede reveal" style="animation-delay: 200ms">
+        Streaming pipes. The DNS root. The regulated-industry CISO chair. And
+        now the AI layer that's about to sit on top of all of it. The part of
+        the internet that has to be right — I keep ending up there.
+      </p>
+    </div>
+  </section>
+
+  <section class="roles">
+    <div class="wrap">
+      {roles.map((r) => <ExperienceEntry {...r} />)}
+    </div>
+  </section>
+
+  <section class="patents">
+    <div class="wrap">
+      <p class="kicker">Patents</p>
+      <h2 class="patents__h">Four filed. The visibility stack and the streaming stack.</h2>
+      <ul class="patents__list">
+        {
+          patents.map((p, i) => (
+            <li class="patents__item">
+              <span class="patents__n num">{String(i + 1).padStart(2, "0")}</span>
+              <span class="patents__title">{p.title}</span>
+              <span class="patents__id mono">{p.id}</span>
+              {p.note && <span class="patents__note mono">{p.note}</span>}
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="broadcast">
+        <p class="kicker">Broadcast</p>
+        <p class="broadcast__text">
+          <a href="https://cloudflare.tv" class="ulink" rel="noopener" target="_blank">Cloudflare TV</a>
+          — RSAC 2025: <em>Disinformation Campaigns, Resiliency and Attack Trends.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(56px, 9vw, 110px) clamp(20px, 4vw, 48px);
+  }
+  .head__h {
+    margin-top: 22px;
+    max-width: 14ch;
+  }
+  .head .lede {
+    margin-top: 26px;
+  }
+  .roles {
+    padding-block: 0 clamp(40px, 7vw, 80px);
+  }
+  .roles .wrap > :global(.xp:last-child) {
+    border-bottom: 1px solid var(--border);
+  }
+  .patents__h {
+    margin-top: 16px;
+    max-width: 20ch;
+  }
+  .patents__list {
+    list-style: none;
+    margin-top: 32px;
+  }
+  .patents__item {
+    display: grid;
+    grid-template-columns: 40px 1fr auto auto;
+    align-items: baseline;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+  }
+  .patents__n {
+    font-size: 12px;
+    color: var(--ember);
+  }
+  .patents__title {
+    font-size: 15.5px;
+    color: var(--silver);
+  }
+  .patents__id {
+    font-size: 12.5px;
+    color: var(--white);
+  }
+  .patents__note {
+    font-size: 11.5px;
+    color: var(--faint);
+  }
+  .broadcast {
+    margin-top: 52px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border-2);
+  }
+  .broadcast__text {
+    margin-top: 12px;
+    font-size: 1.05rem;
+    color: var(--silver);
+  }
+  @media (max-width: 640px) {
+    .patents__item {
+      grid-template-columns: 30px 1fr;
+      gap: 6px 14px;
+    }
+    .patents__id,
+    .patents__note {
+      grid-column: 2;
+    }
+  }
+</style>

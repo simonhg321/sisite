@@ -1,0 +1,211 @@
+---
+import Base from "../layouts/Base.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Figure from "../components/Figure.astro";
+import { withBase } from "../lib/url";
+
+const screens = [
+  {
+    src: "/screens/screen-interface.png",
+    alt: "Internal command-center dashboard showing fleet metrics",
+    title: "The Interface",
+    caption:
+      "The org's internal command center: live fleet status, metrics, and the internal blog that gets promoted to the public log.",
+  },
+  {
+    src: "/screens/screen-blog.png",
+    alt: "Internal blog editor with Promote control and a promoted post",
+    title: "The Skipper — internal → public",
+    caption:
+      "Internal-first writing. One Promote button is the only thing that talks outward, behind a preflight sanitizer.",
+  },
+  {
+    src: "/screens/screen-iot.png",
+    alt: "Home-network visibility dashboard with VLAN distribution",
+    title: "The Home — network visibility",
+    caption:
+      "L2–L8 visibility at household scale: device inventory across VLANs, WAN-block monitoring, hundreds of thousands of syslog lines.",
+  },
+];
+---
+
+<Base
+  title="What I build — Simon Gibson"
+  description="Production AI systems running today. Proof of Human Work, a fleet of Claude agents in production, Drop Watcher, and The Billboard."
+>
+  <section class="head">
+    <div class="wrap">
+      <p class="kicker reveal">What I ship now</p>
+      <h1 class="head__h reveal" style="animation-delay: 90ms">
+        I don't talk about AI. I run it in production.
+      </h1>
+      <p class="lede reveal" style="animation-delay: 200ms">
+        Not slideware. Live systems with Claude in the decision loop, real
+        users, real SMS, and compliance constraints — built and operated solo.
+        More production infrastructure than I had at a funded dot-com in 2000.
+      </p>
+    </div>
+  </section>
+
+  <section class="builds">
+    <div class="wrap builds__grid">
+      <ProjectCard
+        n="01"
+        lead={true}
+        name="Proof of Human Work (PHW)"
+        tagline="Prove your work. Own your proof. Trust no platform."
+        body="A public protocol for the deepfake era. The thesis: <strong>machine output is now the background; human work is the signal</strong> — and that signal needs cryptographic verification. Three guarantees — Privacy, Truth, Proof: raw data stays encrypted locally, assertions are signed to evidence you control, and any verifier confirms offline with no platform in the middle. An Identity Layer (the Vault) plus a Filter Layer (consent); the first credential is Proof of Acquisition. This is the public face of the deepfake-breaker thesis."
+        links={[{ href: "https://instockornot.club/the_vault", label: "instockornot.club/the_vault" }]}
+      />
+
+      <ProjectCard
+        n="02"
+        name="The Castaways — a fleet, and the blog that is its spine"
+        body="A fleet of Claude agents across several machines, coordinating through a shared internal blog that is the spine of the org. Internal-first, always. Interesting stories get <strong>promoted</strong> to the public log — and one Promote button is the only thing that talks to the outside world, behind a preflight sanitizer that redacts internal addresses and vault paths."
+        quote="It's not &lsquo;I use AI.&rsquo; It's a fleet running under a contract I wrote, in production, every day."
+        links={[
+          { href: "https://instockornot.club/blog.html", label: "The Skipper — public log" },
+        ]}
+      />
+      <!-- REVIEW: cv_master says "Four Claudes"; live fleet is five machines. Kept generic ("a fleet" / "several machines") per handoff. Simon sets exact count. -->
+
+      <ProjectCard
+        n="03"
+        name="Drop Watcher"
+        body="Production collector-alert platform, live and paying its own way. Claude in the decision loop, carrier-approved SMS, and a real test suite — the full stack, solo."
+        specs={[
+          { label: "Stack", value: "Python · Flask · SQLite (WAL)" },
+          { label: "Messaging", value: "Twilio A2P 10DLC" },
+          { label: "Tests", value: "43-test suite" },
+          { label: "Status", value: "Live · real users" },
+        ]}
+        links={[
+          { href: "https://github.com/simonhg321/drop-watcher", label: "github.com/simonhg321/drop-watcher" },
+          { href: "https://instockornot.club", label: "instockornot.club" },
+        ]}
+      />
+
+      <ProjectCard
+        n="04"
+        name="The Billboard"
+        body="The domain-agnostic successor to Drop Watcher. Same Claude-in-the-loop architecture, anti-sticky by design, scaled across many sources for the price of a coffee."
+        specs={[
+          { label: "Sources", value: "94+ sites" },
+          { label: "Architecture", value: "Claude-in-the-loop" },
+          { label: "Run cost", value: "~$0.14 / week" },
+        ]}
+      />
+    </div>
+  </section>
+
+  <section class="substrate">
+    <div class="wrap">
+      <p class="kicker">The substrate</p>
+      <p class="substrate__text">
+        Beneath PHW sits an encrypted Vault — a local store on a Mac Mini with a
+        local model and <span class="mono">Fernet</span> authenticated encryption
+        at rest. Plaintext metadata for search, ciphertext for every title and
+        body. <strong>Nothing leaves the network.</strong> It's the
+        identity substrate the public protocol is built on, not its headline.
+      </p>
+    </div>
+  </section>
+
+  <section class="gallery">
+    <div class="wrap">
+      <p class="kicker">Private builds I run</p>
+      <h2 class="gallery__h">The visibility career, run at home.</h2>
+      <p class="lede gallery__lede">
+        Three internal tools on the home network — shown as sanitized
+        screenshots, never linked. Captions describe capability, never internal
+        addresses.
+      </p>
+      <div class="gallery__grid">
+        {screens.map((s) => <Figure {...s} src={withBase(s.src)} />)}
+      </div>
+
+      <div class="allknowing">
+        <p class="kicker">All Knowing</p>
+        <p class="allknowing__text">
+          The one that isn't pictured: <strong>AI log forensics.</strong> A
+          SQLite index over <span class="num">~1.7M</span> log lines with
+          sub-second queries, source/tag/date filters, and a live tail over SSE.
+          A local-model layer turns <span class="mono">?</span>-prefixed plain
+          English into SQL (shown to you), and an <strong>Analyze</strong> button
+          returns a security-analyst writeup citing timestamps and IPs. The
+          visible heir to the Bloomberg/Gigamon network-visibility work — run at
+          home, on a local model.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(56px, 9vw, 110px) clamp(24px, 4vw, 52px);
+  }
+  .head__h {
+    margin-top: 22px;
+    max-width: 16ch;
+  }
+  .head .lede {
+    margin-top: 26px;
+  }
+  .builds {
+    padding-block: clamp(8px, 2vw, 24px) clamp(40px, 7vw, 80px);
+  }
+  .builds__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .builds__grid > :global(.proj--lead) {
+    grid-column: 1 / -1;
+  }
+  .substrate {
+    padding-block: clamp(40px, 6vw, 72px);
+  }
+  .substrate__text {
+    margin-top: 16px;
+    max-width: 62ch;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--silver);
+  }
+  .gallery__h {
+    margin-top: 16px;
+  }
+  .gallery__lede {
+    margin-top: 18px;
+  }
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    margin-top: 40px;
+  }
+  .gallery__grid > :global(figure:first-child) {
+    grid-column: 1 / -1;
+  }
+  .allknowing {
+    margin-top: 52px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: linear-gradient(180deg, var(--panel), var(--ink));
+  }
+  .allknowing__text {
+    margin-top: 14px;
+    max-width: 64ch;
+    font-size: 1.05rem;
+    line-height: 1.68;
+    color: var(--silver);
+  }
+  @media (max-width: 820px) {
+    .builds__grid,
+    .gallery__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

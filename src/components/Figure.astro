@@ -1,0 +1,68 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  title: string;
+  caption: string;
+}
+const { src, alt, title, caption } = Astro.props;
+---
+
+<figure class="fig">
+  <div class="fig__frame">
+    <span class="fig__chrome" aria-hidden="true">
+      <i></i><i></i><i></i>
+    </span>
+    <img src={src} alt={alt} loading="lazy" />
+  </div>
+  <figcaption class="fig__cap">
+    <span class="fig__title mono">{title}</span>
+    <span class="fig__text">{caption}</span>
+  </figcaption>
+</figure>
+
+<style>
+  .fig {
+    margin: 0;
+  }
+  .fig__frame {
+    position: relative;
+    border: 1px solid var(--border-2);
+    border-radius: 11px;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .fig__chrome {
+    display: flex;
+    gap: 7px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel-2);
+  }
+  .fig__chrome i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-2);
+  }
+  .fig__frame img {
+    width: 100%;
+    display: block;
+  }
+  .fig__cap {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .fig__title {
+    font-size: 12px;
+    color: var(--ember);
+    letter-spacing: 0.04em;
+  }
+  .fig__text {
+    font-size: 13.5px;
+    color: var(--ash);
+    line-height: 1.5;
+  }
+</style>

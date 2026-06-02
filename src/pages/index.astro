@@ -1,0 +1,94 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import Pillars from "../components/Pillars.astro";
+import { withBase } from "../lib/url";
+---
+
+<Base
+  title="Simon Gibson — Security leadership, now the safety layer for AI"
+  description="25 years building and securing the infrastructure of the modern internet. Bloomberg's first CISO, Gigamon Fellow, now shipping AI in production daily."
+>
+  <Hero />
+
+  <hr class="rule wrap" style="max-width: var(--maxw);" />
+
+  <Pillars />
+
+  <hr class="rule wrap" style="max-width: var(--maxw);" />
+
+  <section>
+    <div class="wrap thesis">
+      <div>
+        <p class="kicker">The pivot, in one paragraph</p>
+        <h2 class="thesis__head">
+          The model-layer work is extraordinary. The deployment-layer story is
+          what's missing.
+        </h2>
+      </div>
+      <div class="thesis__body">
+        <p>
+          The builders of frontier AI have done remarkable work on model-layer
+          safety. The part that's missing — and about to matter a great deal —
+          is the <strong>deployment-layer story</strong> that lets a JPMorgan CISO
+          sign off on putting this technology inside a regulated bank.
+        </p>
+        <p>
+          That story needs someone who has lived on both sides: the
+          regulated-industry CISO chair <em>and</em> the actual code that
+          integrates frontier models into production under compliance
+          constraints. I've sat in their chair. I know what they're afraid of.
+          And now I know this technology from the inside.
+        </p>
+        <p class="thesis__kick">
+          I don't talk about AI. <strong>I run it in production.</strong>
+        </p>
+        <div class="thesis__cta">
+          <a href={withBase("/build")} class="btn solid">What I ship <span class="arr">→</span></a>
+          <a href={withBase("/contact")} class="btn">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .thesis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+    align-items: start;
+  }
+  .thesis__head {
+    margin-top: 18px;
+    position: sticky;
+    top: 92px;
+  }
+  .thesis__body p {
+    color: var(--silver);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .thesis__kick {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem !important;
+    color: var(--white) !important;
+  }
+  .thesis__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  @media (max-width: 860px) {
+    .thesis {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .thesis__head {
+      position: static;
+    }
+  }
+</style>

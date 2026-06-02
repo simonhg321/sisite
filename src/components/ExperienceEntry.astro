@@ -1,0 +1,109 @@
+---
+interface Props {
+  role: string;
+  company: string;
+  dates: string;
+  location?: string;
+  bullets: string[];
+  tag?: string;
+}
+const { role, company, dates, location, bullets, tag } = Astro.props;
+---
+
+<article class="xp">
+  <div class="xp__meta">
+    <span class="xp__dates num">{dates}</span>
+    {location && <span class="xp__loc mono">{location}</span>}
+    {tag && <span class="xp__tag mono">{tag}</span>}
+  </div>
+  <div class="xp__body">
+    <h3 class="xp__role">{role}</h3>
+    <p class="xp__co mono">{company}</p>
+    <ul class="xp__bullets">
+      {bullets.map((b) => <li set:html={b} />)}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .xp {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 28px;
+    padding-block: 36px;
+    border-top: 1px solid var(--border);
+  }
+  .xp__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 4px;
+  }
+  .xp__dates {
+    font-size: 13px;
+    color: var(--silver);
+  }
+  .xp__loc {
+    font-size: 11.5px;
+    color: var(--faint);
+    letter-spacing: 0.04em;
+  }
+  .xp__tag {
+    align-self: flex-start;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ember);
+    border: 1px solid color-mix(in srgb, var(--ember) 40%, transparent);
+    border-radius: 5px;
+    padding: 3px 8px;
+  }
+  .xp__role {
+    font-size: 1.5rem;
+    line-height: 1.12;
+  }
+  .xp__co {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--ember);
+    letter-spacing: 0.02em;
+  }
+  .xp__bullets {
+    margin-top: 16px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .xp__bullets li {
+    position: relative;
+    padding-left: 22px;
+    color: var(--silver);
+    font-size: 15.5px;
+    line-height: 1.6;
+  }
+  .xp__bullets li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 11px;
+    width: 8px;
+    height: 1px;
+    background: var(--ember);
+  }
+  :global(.xp__bullets li strong) {
+    color: var(--white);
+  }
+  @media (max-width: 720px) {
+    .xp {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .xp__meta {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+</style>
