@@ -7,4 +7,9 @@ export default defineConfig({
   integrations: [mdx()],
   site: 'https://instockornot.club',
   base: '/Simon',
+  markdown: {
+    shikiConfig: {
+      theme: 'css-variables',
+    },
+  },
 });

@@ -141,8 +141,15 @@ import { withBase } from "../lib/url";
   }
   .prose :global(pre) {
     margin-top: 18px;
-    background: var(--ink);
-    border: 1px solid var(--border);
+    --astro-code-color-text: var(--white);
+    --astro-code-color-background: var(--panel-2);
+    --astro-code-token-string-expression: var(--silver);
+    --astro-code-token-keyword: var(--ember-2);
+    --astro-code-token-comment: var(--ash);
+    --astro-code-token-function: var(--cyan);
+    --astro-code-token-constant: var(--ember);
+    background: var(--panel-2);
+    border: 1px solid var(--border-2);
     border-radius: 10px;
     padding: 16px 18px;
     overflow-x: auto;
@@ -150,7 +157,7 @@ import { withBase } from "../lib/url";
   .prose :global(pre code) {
     font-family: var(--mono);
     font-size: 13px;
-    color: var(--silver);
+    color: var(--white);
     background: none;
     border: 0;
     padding: 0;
