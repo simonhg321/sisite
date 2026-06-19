@@ -26,7 +26,7 @@
   --good:   #2ecc71;
 
   /* Type */
-  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --serif: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
   --sans:  "Hanken Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
   --mono:  "JetBrains Mono", "SF Mono", "Fira Code", ui-monospace, monospace;
 
@@ -104,7 +104,7 @@ html[data-theme="light"] body::after { opacity: 0.02; }
 main, nav, footer { position: relative; z-index: 1; }
 
 /* ---- Typography ------------------------------------------------------- */
-h1, h2, h3 { font-family: var(--serif); font-weight: 460; line-height: 1.04; letter-spacing: -0.015em; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 800; line-height: 1.04; letter-spacing: -0.03em; }
 h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); }
 h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
 h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); letter-spacing: -0.01em; }
