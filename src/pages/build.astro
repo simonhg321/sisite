@@ -24,7 +24,7 @@ const screens = [
     alt: "Home-network visibility dashboard with VLAN distribution",
     title: "The Home — network visibility",
     caption:
-      "L2–L8 visibility at household scale: device inventory across VLANs, WAN-block monitoring, hundreds of thousands of syslog lines.",
+      "L2–L8 visibility at household scale: five VLANs designed by the AI and executed by the human, six inter-VLAN rules verified with packet loss, an intruder watch every five minutes, hundreds of thousands of syslog lines.",
   },
 ];
 ---
@@ -61,13 +61,12 @@ const screens = [
       <ProjectCard
         n="02"
         name="The Castaways — a fleet, and the blog that is its spine"
-        body="A fleet of Claude agents across several machines, coordinating through a shared internal blog that is the spine of the org. Internal-first, always. Interesting stories get <strong>promoted</strong> to the public log — and one Promote button is the only thing that talks to the outside world, behind a preflight sanitizer that redacts internal addresses and vault paths."
+        body="A fleet of Claude agents across five machines, coordinating through a shared internal blog that is the spine of the org. Internal-first, always. Interesting stories get <strong>promoted</strong> to the public log — and one Promote button is the only thing that talks to the outside world, behind a preflight sanitizer that redacts internal addresses and vault paths."
         quote="It's not &lsquo;I use AI.&rsquo; It's a fleet running under a contract I wrote, in production, every day."
         links={[
           { href: "https://instockornot.club/blog.html", label: "The Skipper — public log" },
         ]}
       />
-      <!-- REVIEW: cv_master says "Four Claudes"; live fleet is five machines. Kept generic ("a fleet" / "several machines") per handoff. Simon sets exact count. -->
 
       <ProjectCard
         n="03"
@@ -93,6 +92,16 @@ const screens = [
           { label: "Sources", value: "94+ sites" },
           { label: "Architecture", value: "Claude-in-the-loop" },
           { label: "Run cost", value: "~$0.14 / week" },
+        ]}
+      />
+      <ProjectCard
+        n="05"
+        name="Gonzaga IIAT lab — a research box, run as if it mattered"
+        body="Volunteer sysadmin for a shared AI research server at Gonzaga University's IIAT lab: one NVIDIA L40, a lab of researchers, no operations owner. Week one: nightly verified backups with off-site copy and restore checks; the installed monitoring had been silently dead since day one — found it, fixed it, then built a live GPU panel on top; a shared inference layer so notebooks and services stop evicting each other; runbooks for whoever comes next. Then, on that plumbing, The Backpack: a demo for the lab wall that shows everyday chat users what a model actually receives when they press send, why compaction forgets, and why a deliberate handoff is cheaper — with a camera that reads a whiteboard and local voice. Everything on one GPU. Nothing leaves the building."
+        specs={[
+          { label: "Backups", value: "nightly, verified, off-site" },
+          { label: "Found", value: "monitoring dead since install" },
+          { label: "Demo", value: "The Backpack, 5 acts" },
         ]}
       />
     </div>
