@@ -6,6 +6,13 @@ import { withBase } from "../lib/url";
 
 const screens = [
   {
+    src: "/screens/screen-wall.png",
+    alt: "The See it think wall: a question, the answer colored token by token by confidence, the top guesses it almost said, and the context-window and GPU tiles",
+    title: "See it think — the wall",
+    caption:
+      "One screen, one open model on one GPU. Every token of the answer is colored by how sure the model was; the side panel shows what it almost said instead; the bottom row shows the context window filling, the GPU working, and who else is in the room. Shown to a lab at Gonzaga and to a credit union's AI all-hands.",
+  },
+  {
     src: "/screens/screen-interface.png",
     alt: "Internal command-center dashboard showing fleet metrics",
     title: "The Interface",
@@ -31,7 +38,7 @@ const screens = [
 
 <Base
   title="What I build — Simon Gibson"
-  description="Production AI systems running today. Proof of Human Work, a fleet of Claude agents in production, Drop Watcher, and The Billboard."
+  description="Production AI systems running today. Proof of Human Work, See it think, a fleet of Claude agents in production, and Blade-Book."
 >
   <section class="head">
     <div class="wrap">
@@ -60,6 +67,18 @@ const screens = [
 
       <ProjectCard
         n="02"
+        name="See it think — a wall that shows a room what a model is doing"
+        tagline="Every word you see was picked from 150,000 options. Then it did that again for the next word."
+        body="A teaching wall for people who use chat models every day and have never seen inside one. An open model (Qwen3, gpt-oss, a dozen others, switchable from the wall) answers prepared questions on a single GPU, and the room watches: <strong>every token colored by how sure the model was</strong>, the five guesses it almost made instead, the context window filling and then forgetting, temperature and top-p as live dials, and the same brain under different instructions. The anchor demo is a changed Monty Hall: ask it to show its steps and it gets it right; ask for a confident one-liner and it is confidently wrong. <strong>Confidence measures familiarity, not correctness.</strong> Built for Gonzaga's lab wall, then shown at a credit union's AI all-hands."
+        specs={[
+          { label: "Engine", value: "vLLM on one NVIDIA L40" },
+          { label: "Shows", value: "per-token odds · roads not taken · context fill" },
+          { label: "Audience", value: "a lab, then an all-hands of security people" },
+        ]}
+      />
+
+      <ProjectCard
+        n="03"
         name="The Castaways — a fleet, and the blog that is its spine"
         body="A fleet of Claude agents across five machines, coordinating through a shared internal blog that is the spine of the org. Internal-first, always. Interesting stories get <strong>promoted</strong> to the public log — and one Promote button is the only thing that talks to the outside world, behind a preflight sanitizer that redacts internal addresses and vault paths."
         quote="It's not &lsquo;I use AI.&rsquo; It's a fleet running under a contract I wrote, in production, every day."
@@ -69,39 +88,27 @@ const screens = [
       />
 
       <ProjectCard
-        n="03"
-        name="Drop Watcher"
-        body="Production collector-alert platform, live and paying its own way. Claude in the decision loop, carrier-approved SMS, and a real test suite — the full stack, solo."
+        n="04"
+        name="Blade-Book"
+        tagline="One photo. Your whole collection, on the record."
+        body="A registry for knife collectors. Photograph the knife next to its birth card and <strong>Claude reads the card</strong>, fills in the record, and gives the knife its own page. Private by default, shared only when the owner says so, with full export and deletion. Grew out of The Billboard, a Claude-in-the-loop alert engine that watched 94+ dealer sites and sent carrier-approved SMS when a grail dropped, and still feeds it. In beta, with early adoption growing."
         specs={[
-          { label: "Stack", value: "Python · Flask · SQLite (WAL)" },
-          { label: "Messaging", value: "Twilio A2P 10DLC" },
-          { label: "Tests", value: "43-test suite" },
-          { label: "Status", value: "Live · real users" },
+          { label: "Reads the card", value: "Claude vision" },
+          { label: "Sign-in", value: "passwordless email" },
+          { label: "Status", value: "beta · early adoption growing" },
         ]}
         links={[
-          { href: "https://github.com/simonhg321/drop-watcher", label: "github.com/simonhg321/drop-watcher" },
-          { href: "https://instockornot.club", label: "instockornot.club" },
-        ]}
-      />
-
-      <ProjectCard
-        n="04"
-        name="The Billboard"
-        body="The domain-agnostic successor to Drop Watcher. Same Claude-in-the-loop architecture, anti-sticky by design, scaled across many sources for the price of a coffee."
-        specs={[
-          { label: "Sources", value: "94+ sites" },
-          { label: "Architecture", value: "Claude-in-the-loop" },
-          { label: "Run cost", value: "~$0.14 / week" },
+          { href: "https://blade-book.com", label: "blade-book.com" },
         ]}
       />
       <ProjectCard
         n="05"
         name="Gonzaga IIAT lab — a research box, run as if it mattered"
-        body="Volunteer sysadmin for a shared AI research server at Gonzaga University's IIAT lab: one NVIDIA L40, a lab of researchers, no operations owner. Week one: nightly verified backups with off-site copy and restore checks; the installed monitoring had been silently dead since day one — found it, fixed it, then built a live GPU panel on top; a shared inference layer so notebooks and services stop evicting each other; runbooks for whoever comes next. Then, on that plumbing, The Backpack: a demo for the lab wall that shows everyday chat users what a model actually receives when they press send, why compaction forgets, and why a deliberate handoff is cheaper — with a camera that reads a whiteboard and local voice. Everything on one GPU. Nothing leaves the building."
+        body="Volunteer sysadmin for a shared AI research server at Gonzaga University's IIAT lab: one NVIDIA L40, a lab of researchers, no operations owner. Week one: nightly verified backups with off-site copy and restore checks; the installed monitoring had been silently dead since day one — found it, fixed it, then built a live GPU panel on top; a shared inference layer so notebooks and services stop evicting each other; runbooks for whoever comes next. That plumbing is what the See it think wall runs on."
         specs={[
           { label: "Backups", value: "nightly, verified, off-site" },
           { label: "Found", value: "monitoring dead since install" },
-          { label: "Demo", value: "The Backpack, 5 acts" },
+          { label: "Serves", value: "vLLM + Ollama, shared" },
         ]}
       />
     </div>
@@ -122,12 +129,12 @@ const screens = [
 
   <section class="gallery">
     <div class="wrap">
-      <p class="kicker">Private builds I run</p>
+      <p class="kicker">Screens</p>
       <h2 class="gallery__h">The visibility career, run at home.</h2>
       <p class="lede gallery__lede">
-        Three internal tools on the home network — shown as sanitized
-        screenshots, never linked. Captions describe capability, never internal
-        addresses.
+        The wall, and three internal tools on the home network — shown as
+        sanitized screenshots, never linked. Captions describe capability,
+        never internal addresses.
       </p>
       <div class="gallery__grid">
         {screens.map((s) => <Figure {...s} src={withBase(s.src)} />)}
