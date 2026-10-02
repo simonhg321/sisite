@@ -15,13 +15,15 @@ interface Props {
   specs?: Spec[];
   links?: Link[];
   lead?: boolean;
+  wide?: boolean;
   quote?: string;
+  image?: { src: string; alt: string };
 }
-const { n, name, tagline, body, specs = [], links = [], lead = false, quote } =
+const { n, name, tagline, body, specs = [], links = [], lead = false, wide = false, quote, image } =
   Astro.props;
 ---
 
-<article class:list={["card proj", { "proj--lead": lead }]}>
+<article class:list={["card proj", { "proj--lead": lead, "proj--wide": wide || lead }]}>
   <header class="proj__head">
     <span class="proj__n num">{n}</span>
     {lead && <span class="proj__flag mono">Lead artifact</span>}
@@ -31,6 +33,14 @@ const { n, name, tagline, body, specs = [], links = [], lead = false, quote } =
   {tagline && <p class="proj__tagline">{tagline}</p>}
 
   <p class="proj__body" set:html={body} />
+
+  {
+    image && (
+      <a href={image.src} class="proj__image" rel="noopener" target="_blank">
+        <img src={image.src} alt={image.alt} loading="lazy" />
+      </a>
+    )
+  }
 
   {
     quote && (
@@ -116,6 +126,19 @@ const { n, name, tagline, body, specs = [], links = [], lead = false, quote } =
   }
   :global(.proj__body strong) {
     color: var(--white);
+  }
+  .proj__image {
+    display: block;
+    margin-top: 20px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .proj__image img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .proj__quote {
     margin-top: 18px;
