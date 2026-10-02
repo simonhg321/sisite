@@ -93,8 +93,11 @@ const screens = [
         tagline="One photo. Your whole collection, on the record."
         body="A registry for knife collectors. Photograph the knife next to its birth card and <strong>Claude reads the card</strong>, fills in the record, and gives the knife its own page. Private by default, shared only when the owner says so, with full export and deletion. Grew out of The Billboard, a Claude-in-the-loop alert engine that watched 94+ dealer sites and sent carrier-approved SMS when a grail dropped, and still feeds it. In beta, with early adoption growing."
         specs={[
-          { label: "Reads the card", value: "Claude vision" },
-          { label: "Sign-in", value: "passwordless email" },
+          { label: "Stack", value: "Flask · SQLite · Linode behind Cloudflare" },
+          { label: "Reads the card", value: "one schema-forced Claude call per knife" },
+          { label: "Public pages", value: "static per collector · the DB never sees public traffic" },
+          { label: "Sign-in", value: "Apple · Google · magic link" },
+          { label: "Tests", value: "814" },
           { label: "Status", value: "beta · early adoption growing" },
         ]}
         links={[
